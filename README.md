@@ -18,4 +18,4 @@ incrementally following the below milestones:
 The scope of this project is to have a simple 30-room world where 2 or more players can walk around and chat in each individual rooms.
 
 ## Technologies
-  *Node
+  * Node
