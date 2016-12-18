@@ -113,7 +113,7 @@ class World {
     }
     let jsonFormattedSaveData = jsonFormat(worldData, config);
 
-    fs.writeFile(`world_data_${this.name}_save.json`, jsonFormattedWorldData)
+    fs.writeFile(`world_data_${this.name}_save.json`, jsonFormattedSaveData)
   }
 
   // getRoomIdRoomNameMap() {
