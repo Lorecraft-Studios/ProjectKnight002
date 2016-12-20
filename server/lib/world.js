@@ -116,6 +116,21 @@ class World {
     fs.writeFile(`/snapshots/world_data_${this.name}_save.json`, jsonFormattedSaveData)
   }
 
+  loadWorld(world) {
+    for (let roomId in world) {
+      this.addRoom(world[roomId].name, world[roomId].desc);
+    };
+
+    for (let roomId in world) {
+      for (let dir in world[roomId].exits) {
+        if (world[roomId].exits[dir]) {
+          this.addRoomConnection(roomId, world[roomId].exits[dir], dir)
+        }
+      }
+    }
+  };
+
+
   // getRoomIdRoomNameMap() {
   //   let worldObj = this.dataStore;
   //   let idRoomNameMap = {};
