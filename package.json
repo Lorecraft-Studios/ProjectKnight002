@@ -1,14 +1,19 @@
 {
   "name": "projectknight002",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.2",
+  "description": "Online multi user text rpg",
+  "main": "server/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Raymond Luong",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.14.0",
     "json-format": "^0.1.2"
+  },
+  "repository": {
+    "url": "https://github.com/Lorecraft-Studios/ProjectKnight002",
+    "type": "git"
   }
 }
