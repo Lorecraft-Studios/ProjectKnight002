@@ -130,6 +130,11 @@ class World {
     }
   };
 
+  getMapMatrix() {
+    let worldData = this.dataStore;
+    console.log('WorldData', worldData)
+  }
+
 
   // getRoomIdRoomNameMap() {
   //   let worldObj = this.dataStore;
