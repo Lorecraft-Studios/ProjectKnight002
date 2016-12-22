@@ -1,4 +1,4 @@
-{
+worldData = {
   "prologue:0":{
     "roomId":"prologue:0",
     "name":"A Cobblestoned Courtyard",
