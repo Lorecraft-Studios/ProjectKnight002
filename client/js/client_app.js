@@ -1,28 +1,44 @@
 console.log('Hello World from client_app.js');
 
+
+
+console.log ('***worldData***', worldData)
+
+let elements = [];
+
+
+for (let room in worldData) {
+  let nodeElement = { data: {} };
+  let edgeElement = { data: {} };
+
+  nodeElement.data.id = worldData[room].roomId;
+  nodeElement.data.name = worldData[room].name;
+  nodeElement.data.desc = worldData[room].desc;
+  elements.push(nodeElement);
+
+  for (let dir in worldData[room].exits)
+    if (worldData[room].exits[dir]) {
+      edgeElement.data.source = worldData[room].roomId;
+      edgeElement.data.target = worldData[room].exits[dir];
+      elements.push(edgeElement);
+      console.log('***an Edge Element***', edgeElement)
+    }
+}
+
+console.log('***elements***', elements);
+
+
+
 let cy = cytoscape({
   container: document.getElementById('cy'),
-  elements: [ // list of graph elements to start with
-    { // node a
-      data: { id: 'a' }
-    },
-    { // node b
-      data: { id: 'b' }
-    },
-    { // edge ab
-      data: { id: 'ab', source: 'a', target: 'b' }
-    },
-    { // edge ba
-      data: { id: 'ba', source: 'b', target: 'a' }
-    }
-
-  ],
+  elements: elements,
   style: [ // the stylesheet for the graph
     {
       selector: 'node',
+      shape: 'square',
       style: {
         'background-color': '#ccc',
-        'label': 'data(id)'
+        'label': 'data(room)'
       }
     },
     {
@@ -32,7 +48,8 @@ let cy = cytoscape({
         'width': 3,
         'line-color': '#666',
         'target-arrow-color': '#666',
-        'target-arrow-shape': 'triangle'
+        'target-arrow-shape': 'triangle',
+        'source-label': 'e'
       }
     }
   ],
@@ -42,4 +59,3 @@ let cy = cytoscape({
   }
 });
 
-console.log('***cy***', cy)
