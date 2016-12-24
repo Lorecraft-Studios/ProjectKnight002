@@ -1,10 +1,8 @@
 console.log('Hello World from client_app.js');
 
 
-
-console.log ('***worldData***', worldData)
-
-let elements = [];
+let nodeElements = [];
+let edgeElements = [];
 
 
 for (let room in worldData) {
@@ -14,31 +12,36 @@ for (let room in worldData) {
   nodeElement.data.id = worldData[room].roomId;
   nodeElement.data.name = worldData[room].name;
   nodeElement.data.desc = worldData[room].desc;
-  elements.push(nodeElement);
+  nodeElements.push(nodeElement);
 
   for (let dir in worldData[room].exits)
     if (worldData[room].exits[dir]) {
-      edgeElement.data.source = worldData[room].roomId;
-      edgeElement.data.target = worldData[room].exits[dir];
-      elements.push(edgeElement);
-      console.log('***an Edge Element***', edgeElement)
+      edgeElement = { data: {} }
+      let sourceRoomId = worldData[room].roomId;
+      let targetRoomId = worldData[room].exits[dir];
+      edgeElement.data.id = sourceRoomId + '->' + targetRoomId;
+      edgeElement.data.source = sourceRoomId;
+      edgeElement.data.target = targetRoomId;
+      edgeElements.push(edgeElement);
     }
 }
+edgeElements.forEach( (edge) => {
+})
 
-console.log('***elements***', elements);
+let elements = nodeElements.concat(edgeElements);
 
 
 
 let cy = cytoscape({
   container: document.getElementById('cy'),
-  elements: elements,
+  elements: nodeElements,
   style: [ // the stylesheet for the graph
     {
       selector: 'node',
       shape: 'square',
       style: {
         'background-color': '#ccc',
-        'label': 'data(room)'
+        'label': 'data(id)'
       }
     },
     {
@@ -49,7 +52,6 @@ let cy = cytoscape({
         'line-color': '#666',
         'target-arrow-color': '#666',
         'target-arrow-shape': 'triangle',
-        'source-label': 'e'
       }
     }
   ],
@@ -58,4 +60,9 @@ let cy = cytoscape({
     rows: 1
   }
 });
+cy.add(edgeElements);
 
+
+
+
+console.log('***cy.json***', cy.json())
